@@ -2,6 +2,7 @@
 using System;
 using System.Reflection;
 using System.Linq;
+using System.Collections;
 
 namespace ConsoleApp6
 {
@@ -196,20 +197,25 @@ namespace ConsoleApp6
 			int i, j;
 			for (i = 1; i < length; i++)
 			{
-				var temp = array.GetValue(i);
+				IComparable temp = (IComparable)array.GetValue(i);
+				
 				for (j = i - 1; j >= 0; j--) 
 				{
-					//if (array.GetValue(j) > temp.ToString)
-					//{
-
-					//}
+					if (array.GetValue(j) == default)
+					{
+						break;
+					}
+					else if (array.GetValue(j).ToString().CompareTo(temp) < 0) 
+					{
+						break;
+					}
 					array.SetValue(array.GetValue(j), j + 1);
 				}
 				array.SetValue(temp, j + 1);
 			}
 		}
 
-		public static int IndexOf(int[] array, int value)
+		public static int IndexOf(Array array, object? value)
 		{
 			if (array == null)
 			{
@@ -222,10 +228,9 @@ namespace ConsoleApp6
 				return -1;
 			}
 
-			int length = array.Length;
-			for (int i = 0; i < length; i++)
+			for (int i = 0; i < array.Length; i++)
 			{
-				if (array[i] == value)
+				if (array.GetValue(i) == value)
 				{
 					return i;
 				}
@@ -233,7 +238,7 @@ namespace ConsoleApp6
 			return -1;
 		}
 
-		public static int BinarySearch(int[] array, int value)
+		public static int BinarySearch(Array array, object? value)
 		{
 			if (array == null)
 			{
@@ -252,11 +257,11 @@ namespace ConsoleApp6
 			while (low <= high)
 			{
 				mid = (low + high) / 2;
-				if (value < array[mid])
+				if (array.GetValue(mid).ToString().CompareTo(value.ToString()) > 0) 
 				{
 					high = mid - 1;
 				}
-				else if (value > array[mid])
+				else if (array.GetValue(mid).ToString().CompareTo(value.ToString()) < 0)
 				{
 					low = mid + 1;
 				}
@@ -315,18 +320,18 @@ namespace ConsoleApp6
 			}
 			Console.WriteLine();
 
-			//MyArray.Sort(array);
-			//foreach (var item in array)
-			//{
-			//	Console.Write("{0} ", item);
-			//}
-			//Console.WriteLine();
+			MyArray.Sort(array);
+			foreach (var item in array)
+			{
+				Console.Write("{0} ", item);
+			}
+			Console.WriteLine();
 
 
-			//Console.WriteLine("{0}", MyArray.IndexOf(array, 1));
-			//Console.WriteLine();
-			//Console.WriteLine("{0}", MyArray.BinarySearch(array, 0));
-			//Console.WriteLine();
+			Console.WriteLine("{0}", MyArray.IndexOf(array, "4"));
+			Console.WriteLine();
+			Console.WriteLine("{0}", MyArray.BinarySearch(array3, 3));
+			Console.WriteLine();
 		}
 	}
 }
