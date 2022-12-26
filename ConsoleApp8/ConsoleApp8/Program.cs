@@ -133,7 +133,7 @@ namespace ConsoleApp6
 			array = temp;
 		}
 
-		public static void Clear(Array array)
+		public static void Clear<T>(T[] array)
 		{
 			if (array == null)
 			{
@@ -147,7 +147,7 @@ namespace ConsoleApp6
 			}
 		}
 
-		public static void Clear(Array array, int index, int length)
+		public static void Clear<T>(T[] array, int index, int length)
 		{
 			if (array == null)
 			{
@@ -171,16 +171,9 @@ namespace ConsoleApp6
 					array.SetValue(default, i);
 				}
 			}
-			//if (array.Rank >= 2)
-			//{
-			//	for (int i = index; i < destIndex; i++)
-			//	{
-			//		array[i] = 0;
-			//	}
-			//}
 		}
 
-		public static void Sort(Array array)
+		public static void Sort<T>(T[] array) where T : IComparable
 		{
 			if (array == null)
 			{
@@ -197,7 +190,7 @@ namespace ConsoleApp6
 			int i, j;
 			for (i = 1; i < length; i++)
 			{
-				IComparable temp = (IComparable)array.GetValue(i);
+				IComparable temp = array[i];
 				
 				for (j = i - 1; j >= 0; j--) 
 				{
@@ -205,7 +198,7 @@ namespace ConsoleApp6
 					{
 						break;
 					}
-					else if (array.GetValue(j).ToString().CompareTo(temp) < 0) 
+					else if (array[j].CompareTo(temp) < 0) 
 					{
 						break;
 					}
@@ -276,6 +269,35 @@ namespace ConsoleApp6
 
 		
 	}
+
+	public class MyList
+	{
+		public void Add<T>(T item)
+		{
+
+		}
+		public void Clear()
+		{
+
+		}
+		public void CopyTo<T>(T[] array, int arrayIndex)
+		{
+
+		}
+		public void CopyTo<T>(int index, T[] array, int arrayIndex, int count)
+		{
+
+		}
+		public bool Remove<T>(T item)
+		{
+			return false;
+		}
+		public bool Exists<T>(Predicate<T> match)
+		{
+			return true;
+		}
+	}
+
 	class MainApp
 	{
 		static void Main(string[] args)
@@ -283,7 +305,7 @@ namespace ConsoleApp6
 			string[] array = new string[5] { "1", "2", "3", "4", "5" };
 			string[] array2 = new string[5] { "1", "2", "3", "4", "5" };
 			int[] array3 = new int[5] { 1, 2, 3, 4, 5 };
-
+			{ 
 			MyArray.Reverse(array, 0, 4);
 			foreach (var item in array)
 			{
@@ -332,6 +354,9 @@ namespace ConsoleApp6
 			Console.WriteLine();
 			Console.WriteLine("{0}", MyArray.BinarySearch(array3, 3));
 			Console.WriteLine();
+			}
+
+
 		}
 	}
 }
