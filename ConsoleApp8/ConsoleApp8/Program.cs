@@ -270,31 +270,39 @@ namespace ConsoleApp6
 		
 	}
 
-	public class MyList
+	public class MyLists
 	{
-		public void Add<T>(T item)
+		public static void Add<T>(T item)
 		{
 
 		}
-		public void Clear()
+		public static void Clear()
 		{
 
 		}
-		public void CopyTo<T>(T[] array, int arrayIndex)
+		public static void CopyTo<T>(T[] array, int arrayIndex)
 		{
 
 		}
-		public void CopyTo<T>(int index, T[] array, int arrayIndex, int count)
+		public static void CopyTo<T>(int index, T[] array, int arrayIndex, int count)
 		{
 
 		}
-		public bool Remove<T>(T item)
+		public static bool Remove<T>(T item)
 		{
 			return false;
 		}
-		public bool Exists<T>(Predicate<T> match)
+		public static void Insert<T>(int index, T item)
+		{
+
+		}
+		public static bool Exists<T>(Predicate<T> match)
 		{
 			return true;
+		}
+		public static void Sort<T>(System.Collections.Generic.IComparer<T>? comparer)
+		{
+
 		}
 	}
 
@@ -305,58 +313,62 @@ namespace ConsoleApp6
 			string[] array = new string[5] { "1", "2", "3", "4", "5" };
 			string[] array2 = new string[5] { "1", "2", "3", "4", "5" };
 			int[] array3 = new int[5] { 1, 2, 3, 4, 5 };
-			{ 
-			MyArray.Reverse(array, 0, 4);
-			foreach (var item in array)
+
+			//{
+			//	MyArray.Reverse(array, 0, 4);
+			//	foreach (var item in array)
+			//	{
+			//		Console.Write("{0} ", item);
+			//	}
+			//	Console.WriteLine();
+
+			//	MyArray.Fill(array, "6", 1, 3);
+			//	foreach (var item in array)
+			//	{
+			//		Console.Write("{0} ", item);
+			//	}
+			//	Console.WriteLine();
+
+			//	MyArray.Copy(array, array2, 2);
+			//	foreach (var item in array2)
+			//	{
+			//		Console.Write("{0} ", item);
+			//	}
+			//	Console.WriteLine();
+
+			//	MyArray.Resize(ref array3, 3);
+			//	foreach (var item in array3)
+			//	{
+			//		Console.Write("{0} ", item);
+			//	}
+			//	Console.WriteLine();
+
+			//	//int[,] array3 = new int[2, 3] { { 1, 2, 3 }, { 4, 5, 6 } };
+			//	MyArray.Clear(array, 1, 3);
+			//	foreach (var item in array)
+			//	{
+			//		Console.Write("{0} ", item);
+			//	}
+			//	Console.WriteLine();
+
+			//	MyArray.Sort(array);
+			//	foreach (var item in array)
+			//	{
+			//		Console.Write("{0} ", item);
+			//	}
+			//	Console.WriteLine();
+
+
+			//	Console.WriteLine("{0}", MyArray.IndexOf(array, "4"));
+			//	Console.WriteLine();
+			//	Console.WriteLine("{0}", MyArray.BinarySearch(array3, 3));
+			//	Console.WriteLine();
+			//}
+
 			{
-				Console.Write("{0} ", item);
+				List<int> lists = new List<int>() { 1, 2, 3, 4, 5 };
+				MyLists.Add(lists);
 			}
-			Console.WriteLine();
-
-			MyArray.Fill(array, "6", 1, 3);
-			foreach (var item in array)
-			{
-				Console.Write("{0} ", item);
-			}
-			Console.WriteLine();
-
-			MyArray.Copy(array, array2, 2);
-			foreach (var item in array2)
-			{
-				Console.Write("{0} ", item);
-			}
-			Console.WriteLine();
-
-			MyArray.Resize(ref array3, 3);
-			foreach (var item in array3)
-			{
-				Console.Write("{0} ", item);
-			}
-			Console.WriteLine();
-
-			//int[,] array3 = new int[2, 3] { { 1, 2, 3 }, { 4, 5, 6 } };
-			MyArray.Clear(array, 1, 3);
-			foreach (var item in array)
-			{
-				Console.Write("{0} ", item);
-			}
-			Console.WriteLine();
-
-			MyArray.Sort(array);
-			foreach (var item in array)
-			{
-				Console.Write("{0} ", item);
-			}
-			Console.WriteLine();
-
-
-			Console.WriteLine("{0}", MyArray.IndexOf(array, "4"));
-			Console.WriteLine();
-			Console.WriteLine("{0}", MyArray.BinarySearch(array3, 3));
-			Console.WriteLine();
-			}
-
-
 		}
 	}
 }
