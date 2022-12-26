@@ -270,15 +270,31 @@ namespace ConsoleApp6
 		
 	}
 
-	public class MyLists
+	public class MyLists<T> : IList<T>
 	{
-		public static void Add<T>(T item)
-		{
+		public int MaxSize { get; set; }
+		private Queue<T> Items = new Queue<T>();
 
-		}
-		public static void Clear()
-		{
+		int ICollection<T>.Count => throw new NotImplementedException();
 
+		bool ICollection<T>.IsReadOnly => throw new NotImplementedException();
+
+		T IList<T>.this[int index] { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+		//public static void Add(T item)
+		//{
+		//	Items.Enqueue(item);
+		//	if (Items.Count == MaxSize)
+		//	{
+		//		Items.Dequeue();
+		//	}
+
+		//}
+		public static void Clear<T>(List<T> list)
+		{
+			//list.RemoveAll();
+			
+			
 		}
 		public static void CopyTo<T>(T[] array, int arrayIndex)
 		{
@@ -303,6 +319,56 @@ namespace ConsoleApp6
 		public static void Sort<T>(System.Collections.Generic.IComparer<T>? comparer)
 		{
 
+		}
+
+		int IList<T>.IndexOf(T item)
+		{
+			throw new NotImplementedException();
+		}
+
+		void IList<T>.Insert(int index, T item)
+		{
+			throw new NotImplementedException();
+		}
+
+		void IList<T>.RemoveAt(int index)
+		{
+			throw new NotImplementedException();
+		}
+
+		void ICollection<T>.Add(T item)
+		{
+			throw new NotImplementedException();
+		}
+
+		void ICollection<T>.Clear()
+		{
+			throw new NotImplementedException();
+		}
+
+		bool ICollection<T>.Contains(T item)
+		{
+			throw new NotImplementedException();
+		}
+
+		void ICollection<T>.CopyTo(T[] array, int arrayIndex)
+		{
+			throw new NotImplementedException();
+		}
+
+		bool ICollection<T>.Remove(T item)
+		{
+			throw new NotImplementedException();
+		}
+
+		IEnumerator<T> IEnumerable<T>.GetEnumerator()
+		{
+			throw new NotImplementedException();
+		}
+
+		IEnumerator IEnumerable.GetEnumerator()
+		{
+			throw new NotImplementedException();
 		}
 	}
 
@@ -367,7 +433,21 @@ namespace ConsoleApp6
 
 			{
 				List<int> lists = new List<int>() { 1, 2, 3, 4, 5 };
-				MyLists.Add(lists);
+				
+				foreach (var item in lists)
+				{
+					Console.Write("{0} ", item);
+				}
+				Console.WriteLine();
+
+				//MyLists<int>.Add(lists);
+				
+				foreach (var item in lists)
+				{
+					Console.Write("{0} ", item);
+				}
+				Console.WriteLine();
+
 			}
 		}
 	}
