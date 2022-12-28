@@ -270,106 +270,91 @@ namespace ConsoleApp6
 		
 	}
 
-	public class MyLists<T> : IList<T>
+	public class MyLists<T>
 	{
-		public int MaxSize { get; set; }
-		private Queue<T> Items = new Queue<T>();
+		T[] values;
+		int count;
+		int capacity;
+		public int Count
+		{
+			get { return count; }
 
-		int ICollection<T>.Count => throw new NotImplementedException();
-
-		bool ICollection<T>.IsReadOnly => throw new NotImplementedException();
-
-		T IList<T>.this[int index] { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
-		//public static void Add(T item)
-		//{
-		//	Items.Enqueue(item);
-		//	if (Items.Count == MaxSize)
-		//	{
-		//		Items.Dequeue();
-		//	}
-
-		//}
-		public static void Clear<T>(List<T> list)
+		}
+		public int Capacity
+		{
+			get { return capacity; }
+			set
+			{
+				if (value >= count)
+				{
+					capacity = value;
+					if (values == null)
+					{
+						values = new T[capacity];
+					}
+					else
+					{
+						MyArray.Resize(ref values, capacity);
+					}
+				}
+			}
+		}
+		public T this[int index]
+		{
+			get { return values[index]; }
+			set { values[index] = value; }
+		}
+		public MyLists()
+		{
+			Capacity = 1024;
+			//values = new T[Capacity];
+		}
+		public MyLists(int capacity)
+		{
+			Capacity = capacity;
+			//values = new T[Capacity];
+		}
+		public MyLists(IEnumerable<T> collection)
+		{
+			values = collection.ToArray();
+			count = capacity = values.Count();
+		}
+		public void Add(T item)
+		{
+			
+		}
+		public void Clear<T>(List<T> list)
 		{
 			//list.RemoveAll();
 			
 			
 		}
-		public static void CopyTo<T>(T[] array, int arrayIndex)
+		public void CopyTo<T>(T[] array, int arrayIndex)
 		{
 
 		}
-		public static void CopyTo<T>(int index, T[] array, int arrayIndex, int count)
+		public void CopyTo<T>(int index, T[] array, int arrayIndex, int count)
 		{
 
 		}
-		public static bool Remove<T>(T item)
+		public bool Remove<T>(T item)
 		{
 			return false;
 		}
-		public static void Insert<T>(int index, T item)
+		public void Insert<T>(int index, T item)
 		{
 
 		}
-		public static bool Exists<T>(Predicate<T> match)
+		public bool Exists<T>(Predicate<T> match)
 		{
 			return true;
 		}
-		public static void Sort<T>(System.Collections.Generic.IComparer<T>? comparer)
+		public void Sort<T>(System.Collections.Generic.IComparer<T>? comparer)
 		{
 
 		}
 
-		int IList<T>.IndexOf(T item)
-		{
-			throw new NotImplementedException();
-		}
-
-		void IList<T>.Insert(int index, T item)
-		{
-			throw new NotImplementedException();
-		}
-
-		void IList<T>.RemoveAt(int index)
-		{
-			throw new NotImplementedException();
-		}
-
-		void ICollection<T>.Add(T item)
-		{
-			throw new NotImplementedException();
-		}
-
-		void ICollection<T>.Clear()
-		{
-			throw new NotImplementedException();
-		}
-
-		bool ICollection<T>.Contains(T item)
-		{
-			throw new NotImplementedException();
-		}
-
-		void ICollection<T>.CopyTo(T[] array, int arrayIndex)
-		{
-			throw new NotImplementedException();
-		}
-
-		bool ICollection<T>.Remove(T item)
-		{
-			throw new NotImplementedException();
-		}
-
-		IEnumerator<T> IEnumerable<T>.GetEnumerator()
-		{
-			throw new NotImplementedException();
-		}
-
-		IEnumerator IEnumerable.GetEnumerator()
-		{
-			throw new NotImplementedException();
-		}
+		
 	}
 
 	class MainApp
@@ -434,7 +419,7 @@ namespace ConsoleApp6
 			{
 				List<int> lists = new List<int>() { 1, 2, 3, 4, 5 };
 				
-				foreach (var item in lists)
+				foreach (var item in  lists)
 				{
 					Console.Write("{0} ", item);
 				}
