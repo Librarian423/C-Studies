@@ -43,17 +43,13 @@ namespace expression_members
 
             var groupedByBank = from c in customers
                                 where c.Balance >= 1000000.00
-                                let cg2 = new { Bank = c.Bank, Millionaires = c.Name }
-                                group new
-								{
-                                    c.Bank
-								} by c.Bank into cg
-                                //cg2 by cg2.Bank into cg
+                                group c by c.Bank into cg
                                 orderby cg.Key descending
                                 select new 
                                 {
                                     Bank = cg.Key,
-                                   // Millionaires = cg.
+                                    Millionaires = from m in cg
+                                                   select m.Name
                                 };
                                 
             foreach (var item in groupedByBank)
@@ -68,27 +64,32 @@ namespace expression_members
 
             Console.WriteLine();
 
-            // Create some banks and store in a List
-            //List<Bank> banks = new List<Bank>() {
-            //    new Bank(){ Name="First Tennessee", Symbol="FTB"},
-            //    new Bank(){ Name="Wells Fargo", Symbol="WF"},
-            //    new Bank(){ Name="Bank of America", Symbol="BOA"},
-            //    new Bank(){ Name="Citibank", Symbol="CITI"},
-            //};
+			// Create some banks and store in a List
+			List<Bank> banks = new List<Bank>() {
+				new Bank(){ Name="First Tennessee", Symbol="FTB"},
+				new Bank(){ Name="Wells Fargo", Symbol="WF"},
+				new Bank(){ Name="Bank of America", Symbol="BOA"},
+				new Bank(){ Name="Citibank", Symbol="CITI"},
+			};
 
-            //List<Customer> millionaireReport = ???
+            List<Customer> millionaireReport = customers
+                .Where(c => c.Balance >= 1000000.00)
+                .Select(m => new Customer { Name = m.Name, Bank = banks.Find(b => b.Symbol == m.Bank).Name })
+                .ToList();
 
-            //foreach (var customer in millionaireReport)
-            //{
-            //    Console.WriteLine($"{customer.Name} at {customer.Bank}");
-            //}
 
-            // Joe Landy at Wells Fargo
-            // Peg Vale at Bank of America
-            // Les Paul at Wells Fargo
-            // Sarah Ng at First Tennessee
-            // Tina Fey at Citibank
 
-        }
+            foreach (var customer in millionaireReport)
+			{
+				Console.WriteLine($"{customer.Name} at {customer.Bank}");
+			}
+
+			// Joe Landy at Wells Fargo
+			// Peg Vale at Bank of America
+			// Les Paul at Wells Fargo
+			// Sarah Ng at First Tennessee
+			// Tina Fey at Citibank
+
+		}
     }
 }
